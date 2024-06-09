@@ -40,5 +40,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://mern-app-c6q9.onrender.com"
+  "proxy": "https://mern-app-c6q9.onrender.com:5000"
 }
