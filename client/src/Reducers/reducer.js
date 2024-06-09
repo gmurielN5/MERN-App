@@ -19,41 +19,47 @@
 
 export const dataFetchReducer = (state, action) => {
   switch (action.type) {
-    case "LOADING":
+    case 'LOADING':
       return {
         ...state,
         Loading: true,
-      }
+      };
 
-    case "USER_SUCCESS":
+    case 'USER_SUCCESS':
       return {
         ...state,
         user: action.payload.user,
         message: action.payload.message,
         Loading: false,
-      }
-    case "USER_FOLLOW":
+      };
+    case 'USER_FOLLOW':
       return {
         ...state,
         user: {
           ...state.user,
-          following: [...state.user.following, action.payload.followId],
+          following: [
+            ...state.user.following,
+            action.payload.followId,
+          ],
         },
         users: state.users.map((a) => {
           if (a._id === action.payload.userId) {
             return {
               ...a,
               following: [...a.following, action.payload.followId],
-            }
+            };
           } else if (a._id === action.payload.followId) {
-            return { ...a, followers: [...a.followers, action.payload.userId] }
+            return {
+              ...a,
+              followers: [...a.followers, action.payload.userId],
+            };
           } else {
-            return a
+            return a;
           }
         }),
         Loading: false,
-      }
-    case "USER_UNFOLLOW":
+      };
+    case 'USER_UNFOLLOW':
       return {
         ...state,
         user: {
@@ -69,33 +75,35 @@ export const dataFetchReducer = (state, action) => {
               following: a.following.filter(
                 (a) => a !== action.payload.unfollowId
               ),
-            }
+            };
           } else if (a._id === action.payload.unfollowId) {
             return {
               ...a,
-              followers: a.followers.filter((a) => a !== action.payload.userId),
-            }
+              followers: a.followers.filter(
+                (a) => a !== action.payload.userId
+              ),
+            };
           } else {
-            return a
+            return a;
           }
         }),
         Loading: false,
-      }
-    case "GET_INITIAL_CONTENT_SUCCESS":
+      };
+    case 'GET_INITIAL_CONTENT_SUCCESS':
       return {
         ...state,
         articles: action.payload.articles,
         users: action.payload.users,
         topics: action.payload.topics,
         Loading: false,
-      }
-    case "GET_CONTENT_SUCCESS":
+      };
+    case 'GET_CONTENT_SUCCESS':
       return {
         ...state,
         articles: action.payload.articles,
         Loading: false,
-      }
-    case "ADD_CONTENT_SUCCESS":
+      };
+    case 'ADD_CONTENT_SUCCESS':
       return {
         ...state,
         user: {
@@ -104,78 +112,84 @@ export const dataFetchReducer = (state, action) => {
         },
         message: action.payload.message,
         Loading: false,
-      }
-    case "EDIT_CONTENT_SUCCESS":
+      };
+    case 'EDIT_CONTENT_SUCCESS':
       return {
         ...state,
         articles: state.articles.map((a) => {
           if (a._id === action.payload.id) {
-            return action.payload.article
+            return action.payload.article;
           }
-          return a
+          return a;
         }),
         user: {
           ...state.user,
           articles: state.user.articles.map((a) => {
             if (a._id === action.payload.id) {
-              return action.payload.article
+              return action.payload.article;
             }
-            return a
+            return a;
           }),
         },
         message: action.payload.message,
         Loading: false,
-      }
-    case "DELETE_CONTENT_SUCCESS":
+      };
+    case 'DELETE_CONTENT_SUCCESS':
       return {
         ...state,
-        articles: state.articles.filter((a) => a._id !== action.payload),
+        articles: state.articles.filter(
+          (a) => a._id !== action.payload
+        ),
         user: {
           ...state.user,
-          articles: state.user.articles.filter((a) => a._id !== action.payload),
+          articles: state.user.articles.filter(
+            (a) => a._id !== action.payload
+          ),
         },
         Loading: false,
-      }
-    case "ADD_LIKE":
+      };
+    case 'ADD_LIKE':
       return {
         ...state,
         articles: state.articles.map((a) => {
           if (a._id === action.payload.id) {
-            return action.payload.article
+            return action.payload.article;
           }
-          return a
+          return a;
         }),
         Loading: false,
-      }
-    case "REMOVE_LIKE":
+      };
+    case 'REMOVE_LIKE':
       return {
         ...state,
         articles: state.articles.map((a) => {
           if (a._id === action.payload.id) {
             return {
               ...a,
-              likes: a.likes.filter((a) => a !== action.payload.userId),
-            }
+              likes: a.likes.filter(
+                (a) => a !== action.payload.userId
+              ),
+            };
           }
-          return a
+          return a;
         }),
         Loading: false,
-      }
-    case "ERROR":
+      };
+    case 'ERROR':
       return {
         ...state,
         isError: true,
         Loading: false,
-      }
+      };
 
-    case "ERROR_MSG":
+    case 'ERROR_MSG':
       return {
         ...state,
         isError: true,
         Loading: false,
         message: action.payload,
-      }
+      };
     default:
-      return state
+      return state;
   }
-}
+};

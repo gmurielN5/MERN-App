@@ -1,6 +1,11 @@
-import React, { useState, useRef, useEffect, useContext } from "react"
-import { useParams, useNavigate } from "react-router-dom"
-import { AuthContext } from "../../../Context/AuthContext"
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useContext,
+} from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../Context/AuthContext';
 import {
   Container,
   Row,
@@ -10,30 +15,33 @@ import {
   FormGroup,
   Input,
   Button,
-} from "reactstrap"
-import { addPost, updatePost } from "../../../Services/ContentService"
+} from 'reactstrap';
+import {
+  addPost,
+  updatePost,
+} from '../../../Services/ContentService';
 
-import { AddTopic } from "../../Topics/AddTopic/AddTopic"
-import Editable from "../../Utils/FormGrid/Editable"
-import ImageUpload from "../../Utils/ImageUpload/Upload"
+// import { AddTopic } from "../../Topics/AddTopic/AddTopic"
+import Editable from '../../Utils/FormGrid/Editable';
+import ImageUpload from '../../Utils/ImageUpload/Upload';
 
 //get topic list for article category
 
 const ArticleForm = ({ article, isEditing }) => {
-  const { store, dispatch } = useContext(AuthContext)
-  const { user } = store
+  const { store, dispatch } = useContext(AuthContext);
+  const { user } = store;
   const [post, setPost] = useState({
-    title: "",
-    subtitle: "",
-    body: "",
-    status: "Draft",
-  })
-  const [fileData, setFileData] = useState("")
-  const [img, setFile] = useState("")
-  const [imgpreview, setImgpreview] = useState("")
-  const inputRef = useRef({})
-  let { articleId } = useParams()
-  let navigate = useNavigate()
+    title: '',
+    subtitle: '',
+    body: '',
+    status: 'Draft',
+  });
+  const [fileData, setFileData] = useState('');
+  const [img, setFile] = useState('');
+  const [imgpreview, setImgpreview] = useState('');
+  const inputRef = useRef({});
+  let { articleId } = useParams();
+  let navigate = useNavigate();
 
   useEffect(() => {
     if (article) {
@@ -43,44 +51,44 @@ const ArticleForm = ({ article, isEditing }) => {
         subtitle: article.subtitle,
         body: article.body,
         status: article.status,
-      }))
-      setImgpreview(article.img)
-      setFileData(article.img)
+      }));
+      setImgpreview(article.img);
+      setFileData(article.img);
     }
-  }, [article])
+  }, [article]);
 
   const handleChange = (e) => {
-    setPost({ ...post, [e.target.name]: e.target.value })
-  }
+    setPost({ ...post, [e.target.name]: e.target.value });
+  };
 
   //  image
   const handleFileChange = ({ target }) => {
-    const reader = new FileReader()
+    const reader = new FileReader();
     reader.onload = (e) => {
-      setImgpreview(reader.result)
-    }
-    reader.readAsDataURL(target.files[0])
-    setFileData(target.files[0])
-    setFile(target.value)
-  }
+      setImgpreview(reader.result);
+    };
+    reader.readAsDataURL(target.files[0]);
+    setFileData(target.files[0]);
+    setFile(target.value);
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const formdata = new FormData()
-    formdata.append("img", fileData)
-    formdata.append("title", post.title)
-    formdata.append("subtitle", post.subtitle)
-    formdata.append("body", post.body)
-    formdata.append("status", post.status)
+    e.preventDefault();
+    const formdata = new FormData();
+    formdata.append('img', fileData);
+    formdata.append('title', post.title);
+    formdata.append('subtitle', post.subtitle);
+    formdata.append('body', post.body);
+    formdata.append('status', post.status);
     if (isEditing) {
-      updatePost(articleId, formdata, dispatch)
+      updatePost(articleId, formdata, dispatch);
     } else {
-      addPost(user._id, formdata, dispatch)
+      addPost(user._id, formdata, dispatch);
       if (!store.Loading && !store.isError) {
-        navigate("/dashboard")
+        navigate('/dashboard');
       }
     }
-  }
+  };
 
   return (
     <Container fluid>
@@ -96,12 +104,14 @@ const ArticleForm = ({ article, isEditing }) => {
                 Save Draft
               </Button>
             )}
-            {post.status === "Draft" ? (
+            {post.status === 'Draft' ? (
               <Button
                 color="dark"
                 type="submit"
                 className="mx-2"
-                onClick={(e) => setPost({ ...post, status: "Published" })}
+                onClick={(e) =>
+                  setPost({ ...post, status: 'Published' })
+                }
               >
                 Publish
               </Button>
@@ -113,7 +123,7 @@ const ArticleForm = ({ article, isEditing }) => {
           <FormGroup className="p-0 mb-0">
             <Editable
               text={post.title}
-              placeholder={post.title || "Add a title"}
+              placeholder={post.title || 'Add a title'}
               childRef={inputRef}
               type="input"
               edit={isEditing ? false : true}
@@ -133,7 +143,7 @@ const ArticleForm = ({ article, isEditing }) => {
           <FormGroup className="p-0 mb-0">
             <Editable
               text={post.subtitle}
-              placeholder={post.subtitle || "Tell your story ..."}
+              placeholder={post.subtitle || 'Tell your story ...'}
               childRef={inputRef}
               type="input"
               edit={isEditing ? false : true}
@@ -161,14 +171,18 @@ const ArticleForm = ({ article, isEditing }) => {
                 </Col>
               ) : (
                 <Col sm md={12}>
-                  <img src={imgpreview} alt="preview" className="img" />
+                  <img
+                    src={imgpreview}
+                    alt="preview"
+                    className="img"
+                  />
                 </Col>
               )}
               <Col className="text-end">
                 <ImageUpload
                   value={img}
                   handleFileChange={handleFileChange}
-                  text={isEditing ? "Edit" : "Upload"}
+                  text={isEditing ? 'Edit' : 'Upload'}
                 />
               </Col>
             </Row>
@@ -177,7 +191,7 @@ const ArticleForm = ({ article, isEditing }) => {
           <FormGroup className="py-2">
             <Editable
               text={post.body}
-              placeholder={post.body || "add a text"}
+              placeholder={post.body || 'add a text'}
               childRef={inputRef}
               type="textarea"
               edit={isEditing ? false : true}
@@ -200,7 +214,7 @@ const ArticleForm = ({ article, isEditing }) => {
         </Container>
       </Form>
     </Container>
-  )
-}
+  );
+};
 
-export default ArticleForm
+export default ArticleForm;

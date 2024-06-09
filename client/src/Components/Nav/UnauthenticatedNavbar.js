@@ -1,23 +1,27 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import { Navbar, Nav, NavbarBrand, NavItem, Button } from "reactstrap"
+import {
+  Navbar,
+  Nav,
+  NavbarBrand,
+  NavItem,
+  Button,
+} from 'reactstrap';
 
 const UnauthenticatedNavbar = () => {
   return (
     <Navbar className="border-bottom border-dark px-2">
-      <NavbarBrand>
-        <Link to="/">
-          <img
-            alt="logo"
-            src="/logo.svg"
-            style={{
-              height: 60,
-              width: 60,
-            }}
-          />
-          <h1 className="text-dark">voice</h1>
-        </Link>
+      <NavbarBrand to="/">
+        <img
+          alt="logo"
+          src="/logo.svg"
+          style={{
+            height: 60,
+            width: 60,
+          }}
+        />
+        <h1 className="text-dark">voice</h1>
       </NavbarBrand>
 
       <Nav>
@@ -31,7 +35,7 @@ const UnauthenticatedNavbar = () => {
         </NavItem>
       </Nav>
     </Navbar>
-  )
-}
+  );
+};
 
-export default UnauthenticatedNavbar
+export default UnauthenticatedNavbar;

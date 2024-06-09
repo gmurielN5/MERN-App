@@ -1,116 +1,115 @@
-import { userAxios } from "./AuthService"
+import { userAxios } from './AuthService';
 
 export const getProfile = async (userId, dispatch, didCancel) => {
-  dispatch({ type: "LOADING" })
+  dispatch({ type: 'LOADING' });
   try {
-    const response = await userAxios.get(`/user/${userId}`)
-
+    const response = await userAxios.get(`/user/${userId}`);
     if (!didCancel) {
       dispatch({
-        type: "USER_SUCCESS",
+        type: 'USER_SUCCESS',
         payload: {
           user: response.data,
         },
-      })
+      });
     }
   } catch (error) {
     if (!didCancel) {
       dispatch({
-        type: "ERROR",
-      })
+        type: 'ERROR',
+      });
     }
   }
-}
+};
 
 export const updateProfile = async (userId, newInput, dispatch) => {
   dispatch({
-    type: "LOADING",
-  })
+    type: 'LOADING',
+  });
   try {
-    const response = await userAxios.put(`/user/${userId}`, newInput)
+    const response = await userAxios.put(`/user/${userId}`, newInput);
 
     dispatch({
-      type: "USER_SUCCESS",
+      type: 'USER_SUCCESS',
       payload: {
         user: response.data.user,
         message: response.data.message,
       },
-    })
+    });
   } catch (error) {
     dispatch({
-      type: "ERROR_MSG",
+      type: 'ERROR_MSG',
       payload: error.response.data.message,
-    })
+    });
   }
-}
+};
 export const deleteUser = async (userId, dispatch) => {
   dispatch({
-    type: "LOADING",
-  })
+    type: 'LOADING',
+  });
   try {
-    const response = await userAxios.delete(`/user/${userId}`)
+    const response = await userAxios.delete(`/user/${userId}`);
     dispatch({
-      type: "USER_SUCCESS",
+      type: 'USER_SUCCESS',
       payload: {
         user: response.data.user,
         message: response.data.message,
       },
-    })
-    return response
+    });
+    return response;
   } catch (error) {
     dispatch({
-      type: "ERROR_MSG",
+      type: 'ERROR_MSG',
       payload: error.response.data.message,
-    })
+    });
   }
-}
+};
 
 export const follow = async (userId, followId, dispatch) => {
   dispatch({
-    type: "LOADING",
-  })
+    type: 'LOADING',
+  });
   try {
     const response = await userAxios.put(`/user/user/follow`, {
       userId: userId,
       followId: followId,
-    })
+    });
     dispatch({
-      type: "USER_FOLLOW",
+      type: 'USER_FOLLOW',
       payload: {
         userId: response.data.userId,
         followId: response.data.followId,
       },
-    })
-    return response
+    });
+    return response;
   } catch (error) {
     dispatch({
-      type: "ERROR_MSG",
+      type: 'ERROR_MSG',
       payload: error.response.data.message,
-    })
+    });
   }
-}
+};
 
 export const unfollow = async (userId, unfollowId, dispatch) => {
   dispatch({
-    type: "LOADING",
-  })
+    type: 'LOADING',
+  });
   try {
     const response = await userAxios.put(`/user/user/unfollow`, {
       userId: userId,
       unfollowId: unfollowId,
-    })
+    });
     dispatch({
-      type: "USER_UNFOLLOW",
+      type: 'USER_UNFOLLOW',
       payload: {
         userId: response.data.userId,
         unfollowId: response.data.unfollowId,
       },
-    })
-    return response
+    });
+    return response;
   } catch (error) {
     dispatch({
-      type: "ERROR_MSG",
+      type: 'ERROR_MSG',
       payload: error.response.data.message,
-    })
+    });
   }
-}
+};

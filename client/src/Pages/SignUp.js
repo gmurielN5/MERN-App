@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import React, { useState, useRef, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Container,
   Row,
@@ -9,56 +9,58 @@ import {
   FormGroup,
   Input,
   Label,
-} from "reactstrap"
-import { Register } from "../Services/AuthService"
+} from 'reactstrap';
+import { Register } from '../Services/AuthService';
 
-import Message from "../Components/Message/Message"
+import Message from '../Components/Message/Message';
 
 const RegisterForm = () => {
   const [user, setUser] = useState({
-    email: "",
-    username: "",
-    password: "",
-    passwordConfirmation: "",
-  })
-  const [message, setMessage] = useState(null)
-  const navigate = useNavigate()
-  let timerID = useRef(null)
+    email: '',
+    username: '',
+    password: '',
+    passwordConfirmation: '',
+  });
+  const [message, setMessage] = useState(null);
+  const navigate = useNavigate();
+  let timerID = useRef(null);
 
   useEffect(() => {
     return () => {
-      clearTimeout(timerID)
-    }
-  }, [])
+      clearTimeout(timerID);
+    };
+  }, []);
 
   const onChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value })
-  }
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
 
   const resetForm = () => {
     setUser({
-      email: "",
-      username: "",
-      password: "",
-      passwordConfirmation: "",
-    })
-  }
+      email: '',
+      username: '',
+      password: '',
+      passwordConfirmation: '',
+    });
+  };
 
   const onSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     Register(user)
       .then((data) => {
-        const { message } = data
-        setMessage(message)
+        console.log('data', data);
+        const { message } = data;
+        setMessage(message);
         if (!message.msgError) {
-          resetForm()
-          navigate("/login")
+          resetForm();
+          navigate('/login');
         }
       })
       .catch((error) => {
-        setMessage(error.message)
-      })
-  }
+        console.log(error);
+        setMessage(error.message);
+      });
+  };
 
   return (
     <Container className="sc pt-5">
@@ -131,7 +133,7 @@ const RegisterForm = () => {
         </Row>
       </Container>
     </Container>
-  )
-}
+  );
+};
 
-export default RegisterForm
+export default RegisterForm;

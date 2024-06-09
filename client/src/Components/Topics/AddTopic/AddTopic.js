@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState } from 'react';
 import {
   Button,
   Modal,
@@ -6,15 +6,15 @@ import {
   ModalBody,
   ModalFooter,
   Container,
-  Row,
-  Col,
-} from "reactstrap"
-import { ListTopics } from "../ListTopics/ListTopics"
-import { Tags } from "react-bootstrap-icons"
+  // Row,
+  // Col,
+} from 'reactstrap';
+import { ListTopics } from '../ListTopics/ListTopics';
+import { Tags } from 'react-bootstrap-icons';
 export const AddTopic = ({ topics }) => {
-  const [modal, setModal] = useState(false)
+  const [modal, setModal] = useState(false);
 
-  const toggle = () => setModal(!modal)
+  const toggle = () => setModal(!modal);
 
   return (
     <>
@@ -51,7 +51,7 @@ export const AddTopic = ({ topics }) => {
         </Container>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default AddTopic
+export default AddTopic;

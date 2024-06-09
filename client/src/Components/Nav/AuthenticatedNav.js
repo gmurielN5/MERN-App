@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react"
-import { Link } from "react-router-dom"
-import { AuthContext } from "../../Context/AuthContext"
-import { removeToken } from "../../util"
+import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthContext';
+import { removeToken } from '../../util';
 import {
   Container,
   Navbar,
@@ -14,42 +14,41 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-} from "reactstrap"
+} from 'reactstrap';
 import {
   House,
   FileText,
   PencilSquare,
   CaretDownFill,
-} from "react-bootstrap-icons"
+} from 'react-bootstrap-icons';
 
-import Avatar from "../User/Avatar/Avatar"
+import Avatar from '../User/Avatar/Avatar';
 
 const AuthenticatedNav = () => {
-  const { store, setIsAuthenticated, dispatch } = useContext(AuthContext)
-  const [isOpen, setIsOpen] = useState(false)
+  const { store, setIsAuthenticated, dispatch } =
+    useContext(AuthContext);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const toggle = () => setIsOpen(!isOpen)
+  const toggle = () => setIsOpen(!isOpen);
 
   //!todo call dispacth delete user
   const LoggoutHandler = (e) => {
     dispatch({
-      type: "USER_SUCCESS",
+      type: 'USER_SUCCESS',
       payload: {
-        user: "",
+        user: '',
       },
-    })
-    removeToken("token")
-    setIsAuthenticated(false)
-  }
+    });
+    removeToken('token');
+    setIsAuthenticated(false);
+  };
 
   return (
     <Navbar expand="sm" color="light" className="navBar">
       <Container className="sidebar-wrapper">
         <Container className="p-0 d-flex justify-content-between">
-          <NavbarBrand className="m-0">
-            <Link to="/dashboard">
-              <img alt="logo" src="/logo.svg" className="logo" />
-            </Link>
+          <NavbarBrand className="m-0" to="/dashboard">
+            <img alt="logo" src="/logo.svg" className="logo" />
           </NavbarBrand>
 
           <NavbarToggler onClick={toggle} className="me-2 border-0">
@@ -90,7 +89,10 @@ const AuthenticatedNav = () => {
               <p className="d-sm-none">Sign Out</p>
             </NavItem>
 
-            <UncontrolledDropdown direction="up" className="d-none d-sm-block">
+            <UncontrolledDropdown
+              direction="up"
+              className="d-none d-sm-block"
+            >
               <DropdownToggle className="toggle p-0">
                 <Avatar user={store.user} size="thumbnail" />
               </DropdownToggle>
@@ -98,7 +100,10 @@ const AuthenticatedNav = () => {
                 <DropdownItem className="py-4">
                   <Link to={`/dashboard/settings`}>Settings</Link>
                 </DropdownItem>
-                <DropdownItem onClick={LoggoutHandler} className=" pb-4">
+                <DropdownItem
+                  onClick={LoggoutHandler}
+                  className=" pb-4"
+                >
                   Sign out
                 </DropdownItem>
               </DropdownMenu>
@@ -107,7 +112,7 @@ const AuthenticatedNav = () => {
         </Collapse>
       </Container>
     </Navbar>
-  )
-}
+  );
+};
 
-export default AuthenticatedNav
+export default AuthenticatedNav;

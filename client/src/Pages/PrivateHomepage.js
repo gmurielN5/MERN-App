@@ -1,16 +1,16 @@
-import React, { useContext } from "react"
-import { Container, Col, Row } from "reactstrap"
-import { AuthContext } from "../Context/AuthContext"
+import React, { useContext } from 'react';
+import { Container, Col, Row } from 'reactstrap';
+import { AuthContext } from '../Context/AuthContext';
 
-import { FilterButton } from "../Components/Article/Feeds/FilterButton"
-import { SuggestedPosts } from "../Components/Article/SuggestedPosts/SuggestedPost"
-import { SuggestedUsers } from "../Components/User/SuggestedUser/SuggestedUsers"
-import { ListTopics } from "../Components/Topics/ListTopics/ListTopics"
+import { FilterButton } from '../Components/Article/Feeds/FilterButton';
+import { SuggestedPosts } from '../Components/Article/SuggestedPosts/SuggestedPost';
+import { SuggestedUsers } from '../Components/User/SuggestedUser/SuggestedUsers';
+import { ListTopics } from '../Components/Topics/ListTopics/ListTopics';
 
-import { SearchBar } from "../Components/Search/Search"
+import { SearchBar } from '../Components/Search/Search';
 
 const PrivateHomepage = () => {
-  const { store } = useContext(AuthContext)
+  const { store } = useContext(AuthContext);
 
   return (
     <Container fluid>
@@ -19,7 +19,9 @@ const PrivateHomepage = () => {
           {store.user.topics > 0 ? (
             <Row>
               <Col>
-                <h5 className="d-none d-sm-block py-2">your topics</h5>
+                <h5 className="d-none d-sm-block py-2">
+                  your topics
+                </h5>
               </Col>
               <Col className="d-flex justify-content-end align-items-baseline">
                 <ListTopics topics={store.user.topics} />
@@ -51,7 +53,7 @@ const PrivateHomepage = () => {
         </Col>
       </Row>
     </Container>
-  )
-}
+  );
+};
 
-export default PrivateHomepage
+export default PrivateHomepage;

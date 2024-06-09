@@ -1,165 +1,177 @@
-import { userAxios } from "./AuthService"
+import { userAxios } from './AuthService';
 
 // GET REQUEST : '/public' get all articles
 export const listNewsFeed = async (dispatch, didCancel) => {
-  dispatch({ type: "LOADING" })
+  dispatch({ type: 'LOADING' });
   try {
-    const response = await userAxios.get("/public")
-
+    const response = await userAxios.get('/public');
     if (!didCancel) {
       dispatch({
-        type: "GET_INITIAL_CONTENT_SUCCESS",
+        type: 'GET_INITIAL_CONTENT_SUCCESS',
         payload: {
           articles: response.data.articles,
           users: response.data.users,
           topics: response.data.topics,
         },
-      })
+      });
     }
   } catch (error) {
     if (!didCancel) {
       dispatch({
-        type: "ERROR",
-      })
+        type: 'ERROR',
+      });
     }
   }
-}
+};
 
 // GET : '/dashboard/feed/:userId' get news feed by user
 export const listFollowing = async (userId, dispatch, didCancel) => {
-  dispatch({ type: "LOADING" })
+  dispatch({ type: 'LOADING' });
   try {
-    const response = await userAxios.get(`/dashboard/following/${userId}`)
+    const response = await userAxios.get(
+      `/dashboard/following/${userId}`
+    );
 
     if (!didCancel) {
       dispatch({
-        type: "GET_CONTENT_SUCCESS",
+        type: 'GET_CONTENT_SUCCESS',
         payload: {
           articles: response.data.articles,
         },
-      })
+      });
     }
   } catch (error) {
     if (!didCancel) {
       dispatch({
-        type: "ERROR",
-      })
+        type: 'ERROR',
+      });
     }
   }
-}
+};
 
 // add article
 export const addPost = async (userId, newitem, dispatch) => {
-  dispatch({ type: "LOADING" })
+  dispatch({ type: 'LOADING' });
   try {
-    const response = await userAxios.post(`/dashboard/${userId}`, newitem)
+    const response = await userAxios.post(
+      `/dashboard/${userId}`,
+      newitem
+    );
     dispatch({
-      type: "ADD_CONTENT_SUCCESS",
+      type: 'ADD_CONTENT_SUCCESS',
       payload: {
         article: response.data.article,
         message: response.data.message,
       },
-    })
+    });
   } catch (error) {
     dispatch({
-      type: "ERROR_MSG",
+      type: 'ERROR_MSG',
       payload: error.response.data.message,
-    })
+    });
   }
-}
+};
 
 // Update article
 export const updatePost = async (articleId, newInput, dispatch) => {
   dispatch({
-    type: "LOADING",
-  })
+    type: 'LOADING',
+  });
   try {
-    const response = await userAxios.put(`/dashboard/${articleId}`, newInput)
+    const response = await userAxios.put(
+      `/dashboard/${articleId}`,
+      newInput
+    );
     dispatch({
-      type: "EDIT_CONTENT_SUCCESS",
+      type: 'EDIT_CONTENT_SUCCESS',
       payload: {
         id: response.data.article._id,
         article: response.data.article,
         message: response.data.message,
       },
-    })
+    });
   } catch (error) {
     dispatch({
-      type: "ERROR_MSG",
+      type: 'ERROR_MSG',
       payload: error.response.data.message,
-    })
+    });
   }
-}
+};
 
 // Delete article
 export const deletePost = async (articleId, dispatch) => {
   dispatch({
-    type: "LOADING",
-  })
+    type: 'LOADING',
+  });
   try {
-    const response = await userAxios.delete(`/dashboard/${articleId}`)
+    const response = await userAxios.delete(
+      `/dashboard/${articleId}`
+    );
     dispatch({
-      type: "DELETE_CONTENT_SUCCESS",
+      type: 'DELETE_CONTENT_SUCCESS',
       payload: response.data.article._id,
-    })
+    });
   } catch (error) {
     dispatch({
-      type: "ERROR_MSG",
+      type: 'ERROR_MSG',
       payload: error.response.data.message,
-    })
+    });
   }
-}
+};
 
 // Add likes
 export const addLike = async (userId, articleId, dispatch) => {
   dispatch({
-    type: "LOADING",
-  })
+    type: 'LOADING',
+  });
   try {
     const response = await userAxios.put(`/dashboard/article/like`, {
       userId: userId,
       articleId: articleId,
-    })
+    });
     dispatch({
-      type: "ADD_LIKE",
+      type: 'ADD_LIKE',
       payload: {
         userId: response.data.userId,
         id: response.data.article._id,
         article: response.data.article,
       },
-    })
-    return response
+    });
+    return response;
   } catch (error) {
     dispatch({
-      type: "ERROR",
+      type: 'ERROR',
       payload: error.response.data.message,
-    })
+    });
   }
-}
+};
 
 // Unlikes
 export const unLike = async (userId, articleId, dispatch) => {
   dispatch({
-    type: "LOADING",
-  })
+    type: 'LOADING',
+  });
   try {
-    const response = await userAxios.put(`/dashboard/article/unlike`, {
-      userId: userId,
-      articleId: articleId,
-    })
+    const response = await userAxios.put(
+      `/dashboard/article/unlike`,
+      {
+        userId: userId,
+        articleId: articleId,
+      }
+    );
     dispatch({
-      type: "REMOVE_LIKE",
+      type: 'REMOVE_LIKE',
       payload: {
         userId: response.data.userId,
         id: response.data.article._id,
         article: response.data.article,
       },
-    })
-    return response
+    });
+    return response;
   } catch (error) {
     dispatch({
-      type: "ERROR",
+      type: 'ERROR',
       payload: error.response.data.message,
-    })
+    });
   }
-}
+};

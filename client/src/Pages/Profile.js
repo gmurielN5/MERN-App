@@ -1,26 +1,33 @@
-import React, { useEffect, useState, useContext } from "react"
-import { Link } from "react-router-dom"
-import { Container, Row, Col } from "reactstrap"
+import React, {
+  useEffect,
+  useState,
+  useContext,
+  useCallback,
+} from 'react';
+import { Link } from 'react-router-dom';
+import { Container, Row, Col } from 'reactstrap';
 
-import { AuthContext } from "../Context/AuthContext"
+import { AuthContext } from '../Context/AuthContext';
 
-import FilterButton from "../Components/Article/FilterSelector/FilterButton"
+import FilterButton from '../Components/Article/FilterSelector/FilterButton';
 
-import CardPost from "../Components/Article/Card/Card"
+import CardPost from '../Components/Article/Card/Card';
 
 const FILTER_MAP = {
-  drafts: (article) => article.status === "Draft",
-  published: (article) => article.status === "Published",
-}
+  drafts: (article) => article.status === 'Draft',
+  published: (article) => article.status === 'Published',
+};
 
-const FILTER_NAMES = Object.keys(FILTER_MAP)
+const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 const Profile = () => {
-  const { store, dispatch } = useContext(AuthContext)
-  const { user } = store
+  const { store, dispatch } = useContext(AuthContext);
+  const { user } = store;
 
-  const [filteredArticles, setFilteredArticles] = useState(user.articles)
-  const [filter, setFilter] = useState()
+  const [filteredArticles, setFilteredArticles] = useState(
+    user.articles
+  );
+  const [filter, setFilter] = useState();
 
   const filterList = FILTER_NAMES.map((name) => (
     <FilterButton
@@ -29,20 +36,23 @@ const Profile = () => {
       isPressed={name === filter}
       setFilter={setFilter}
     />
-  ))
+  ));
 
-  const handleFilter = (filteredData) => {
-    if (!filter) {
-      return filteredData
-    }
-    const filtered = filteredData.filter(FILTER_MAP[filter])
-    return filtered
-  }
+  const handleFilter = useCallback(
+    (filteredData) => {
+      if (!filter) {
+        return filteredData;
+      }
+      const filtered = filteredData.filter(FILTER_MAP[filter]);
+      return filtered;
+    },
+    [filter]
+  );
 
   useEffect(() => {
-    let filteredData = handleFilter(user.articles)
-    setFilteredArticles(filteredData)
-  }, [user.articles, filter])
+    let filteredData = handleFilter(user.articles);
+    setFilteredArticles(filteredData);
+  }, [user.articles, filter, handleFilter]);
 
   return (
     <Container fluid>
@@ -73,15 +83,17 @@ const Profile = () => {
             </Col>
           ) : (
             <Col className="pt-5 px-0">
-              <Link to={"/dashboard/new"}>
-                <p className="text-center">Write your first article</p>
+              <Link to={'/dashboard/new'}>
+                <p className="text-center">
+                  Write your first article
+                </p>
               </Link>
             </Col>
           )}
         </Row>
       </Container>
     </Container>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;
