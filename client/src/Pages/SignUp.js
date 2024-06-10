@@ -48,7 +48,6 @@ const RegisterForm = () => {
     e.preventDefault();
     Register(user)
       .then((data) => {
-        console.log('data', data);
         const { message } = data;
         setMessage(message);
         if (!message.msgError) {
@@ -57,7 +56,6 @@ const RegisterForm = () => {
         }
       })
       .catch((error) => {
-        console.log(error);
         setMessage(error.message);
       });
   };

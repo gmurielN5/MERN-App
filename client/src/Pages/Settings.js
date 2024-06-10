@@ -49,7 +49,6 @@ const Settings = () => {
     formdata.append("avatar", fileData)
     formdata.append("username", update.username)
     formdata.append("about", update.about)
-    console.log(formdata)
     updateProfile(user._id, formdata, dispatch)
   }
 

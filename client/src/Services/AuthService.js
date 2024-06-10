@@ -54,7 +54,10 @@ export const Login = async (user, dispatch) => {
 export const IsAuthenticated = async (dispatch, didCancel) => {
   dispatch({ type: 'LOADING' });
   try {
-    const response = await userAxios.get('/user/profile');
+    const response = await userAxios.get(
+      'https://mern-app-c6q9.onrender.com/user/profile'
+    );
+    console.log('response', response);
     if (!didCancel) {
       dispatch({
         type: 'USER_SUCCESS',

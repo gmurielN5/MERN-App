@@ -9,10 +9,10 @@ export const Topics = () => {
     e.preventDefault()
     postTopic(topic)
       .then((data) => {
-        console.log(data)
+        // console.log(data)
       })
       .catch((error) => {
-        console.log(error.message)
+        // console.log(error.message)
       })
   }
 

@@ -32,7 +32,6 @@ const ViewTemplate = ({ author, article, setArticle }) => {
       navigate("/login", { replace: true })
     }
     callApi(user._id, articleId, dispatch).then((response) => {
-      console.log(response)
       const { article } = response.data
       setArticle(article)
     })
