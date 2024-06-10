@@ -31,18 +31,27 @@ mongoose
 mongoose.Promise = global.Promise;
 
 // CORS Configuration
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  );
-  if (req.methods === 'OPTIONS') {
-    res.header('Access-Control-Allow-Methods', 'PUT,POST,DELETE');
-    return res.status(200).json({});
-  }
-  next();
-});
+
+const corsOptions = {
+  origin: 'https://mern-app-front-end.onrender.com',
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header(
+//     'Access-Control-Allow-Headers',
+//     'Origin, X-Requested-With, Content-Type, Accept'
+//   );
+//   if (req.methods === 'OPTIONS') {
+//     res.header('Access-Control-Allow-Methods', 'PUT,POST,DELETE');
+//     return res.status(200).json({});
+//   }
+//   next();
+// });
+
 //Sending static files requests to the client
 app.use(express.static(path.resolve(__dirname, './client/build')));
 
