@@ -19,7 +19,7 @@ AuthRouter.post(
     .notEmpty()
     .withMessage('Username is required')
     .custom((value) => {
-      return UserModel.findOne({ username: value }).then((user) => {
+      return UserModel.find({ username: value }).then((user) => {
         if (user) {
           return Promise.reject('Username already taken');
         }

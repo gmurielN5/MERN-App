@@ -7,6 +7,7 @@ export const listNewsFeed = async (dispatch, didCancel) => {
     const response = await userAxios.get(
       'https://mern-app-c6q9.onrender.com/public'
     );
+    console.log('public page listNewsFeed get request', response);
     if (!didCancel) {
       dispatch({
         type: 'GET_INITIAL_CONTENT_SUCCESS',

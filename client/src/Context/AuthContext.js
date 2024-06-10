@@ -34,6 +34,7 @@ export const AuthContextProvider = ({ children }) => {
     let didCancel = false;
     const getStatus = async () => {
       await IsAuthenticated(dispatch, didCancel).then((response) => {
+        console.log('is authenticated', response);
         if (response) {
           setIsAuthenticated(response.data.isAuthenticated);
           navigate('/dashboard');
