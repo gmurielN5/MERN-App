@@ -22,7 +22,7 @@ userAxios.interceptors.request.use(
 
 export const Register = (user) => {
   return userAxios
-    .post('/signup', user)
+    .post('https://mern-app-c6q9.onrender.com/signup', user)
     .then((response) => {
       return response.data;
     })
@@ -34,7 +34,10 @@ export const Register = (user) => {
 export const Login = async (user, dispatch) => {
   dispatch({ type: 'LOADING' });
   try {
-    const response = await userAxios.post('/login', user);
+    const response = await userAxios.post(
+      'https://mern-app-c6q9.onrender.com/login',
+      user
+    );
     dispatch({
       type: 'USER_SUCCESS',
       payload: {
@@ -57,7 +60,6 @@ export const IsAuthenticated = async (dispatch, didCancel) => {
     const response = await userAxios.get(
       'https://mern-app-c6q9.onrender.com/user/profile'
     );
-    console.log('response', response);
     if (!didCancel) {
       dispatch({
         type: 'USER_SUCCESS',

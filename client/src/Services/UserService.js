@@ -3,7 +3,9 @@ import { userAxios } from './AuthService';
 export const getProfile = async (userId, dispatch, didCancel) => {
   dispatch({ type: 'LOADING' });
   try {
-    const response = await userAxios.get(`/user/${userId}`);
+    const response = await userAxios.get(
+      `https://mern-app-c6q9.onrender.com/user/${userId}`
+    );
     if (!didCancel) {
       dispatch({
         type: 'USER_SUCCESS',
@@ -26,7 +28,10 @@ export const updateProfile = async (userId, newInput, dispatch) => {
     type: 'LOADING',
   });
   try {
-    const response = await userAxios.put(`/user/${userId}`, newInput);
+    const response = await userAxios.put(
+      `https://mern-app-c6q9.onrender.com/user/${userId}`,
+      newInput
+    );
 
     dispatch({
       type: 'USER_SUCCESS',
@@ -47,7 +52,9 @@ export const deleteUser = async (userId, dispatch) => {
     type: 'LOADING',
   });
   try {
-    const response = await userAxios.delete(`/user/${userId}`);
+    const response = await userAxios.delete(
+      `https://mern-app-c6q9.onrender.com/user/${userId}`
+    );
     dispatch({
       type: 'USER_SUCCESS',
       payload: {
@@ -69,10 +76,13 @@ export const follow = async (userId, followId, dispatch) => {
     type: 'LOADING',
   });
   try {
-    const response = await userAxios.put(`/user/user/follow`, {
-      userId: userId,
-      followId: followId,
-    });
+    const response = await userAxios.put(
+      `https://mern-app-c6q9.onrender.com/user/user/follow`,
+      {
+        userId: userId,
+        followId: followId,
+      }
+    );
     dispatch({
       type: 'USER_FOLLOW',
       payload: {
@@ -94,10 +104,13 @@ export const unfollow = async (userId, unfollowId, dispatch) => {
     type: 'LOADING',
   });
   try {
-    const response = await userAxios.put(`/user/user/unfollow`, {
-      userId: userId,
-      unfollowId: unfollowId,
-    });
+    const response = await userAxios.put(
+      `https://mern-app-c6q9.onrender.com/user/user/unfollow`,
+      {
+        userId: userId,
+        unfollowId: unfollowId,
+      }
+    );
     dispatch({
       type: 'USER_UNFOLLOW',
       payload: {
