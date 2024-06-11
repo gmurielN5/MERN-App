@@ -21,7 +21,7 @@ userAxios.interceptors.request.use(
 );
 
 export const Register = (user) => {
-  console.log('post signup usesr', user);
+  console.log('post signup user', user);
   return userAxios
     .post('https://mern-app-c6q9.onrender.com/signup', user)
     .then((response) => {
@@ -62,7 +62,6 @@ export const IsAuthenticated = async (dispatch, didCancel) => {
     const response = await userAxios.get(
       'https://mern-app-c6q9.onrender.com/user/profile'
     );
-    console.log('get isauthenticated response', response);
     if (!didCancel) {
       dispatch({
         type: 'USER_SUCCESS',
