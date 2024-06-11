@@ -14,18 +14,18 @@ const AuthRouter = express.Router();
 
 AuthRouter.post(
   '/signup',
-  // userValidation(),
-  // body('username')
-  //   .notEmpty()
-  //   .withMessage('Username is required')
-  //   .custom((value) => {
-  //     return UserModel.find({ username: value }).then((user) => {
-  //       if (user) {
-  //         return Promise.reject('Username already taken');
-  //       }
-  //     });
-  //   }),
-  // validate,
+  userValidation(),
+  body('username')
+    .notEmpty()
+    .withMessage('Username is required')
+    .custom((value) => {
+      return UserModel.find({ username: value }).then((user) => {
+        if (user) {
+          return Promise.reject('Username already taken');
+        }
+      });
+    }),
+  validate,
   async (req, res, next) => {
     try {
       const { email, username, password, passwordConfirmation } =
