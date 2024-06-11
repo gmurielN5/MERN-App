@@ -1,5 +1,8 @@
-import ArticleForm from "../Components/Article/Form/ArticleForm"
+import ArticleForm from '../Components/Article/Form/ArticleForm';
 
 export const NewArticle = () => {
-  return <ArticleForm />
-}
+  return (
+    <h1>test form</h1>
+    // <ArticleForm />
+  );
+};

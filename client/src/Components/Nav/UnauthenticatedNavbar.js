@@ -1,18 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import {
-  Navbar,
-  Nav,
-  NavbarBrand,
-  NavItem,
-  Button,
-} from 'reactstrap';
+import { Navbar, Nav, NavItem, Button } from 'reactstrap';
 
 const UnauthenticatedNavbar = () => {
   return (
     <Navbar className="border-bottom border-dark px-2">
-      <NavbarBrand to="/">
+      <Link to="/">
         <img
           alt="logo"
           src="/logo.svg"
@@ -22,7 +16,7 @@ const UnauthenticatedNavbar = () => {
           }}
         />
         <h1 className="text-dark">voice</h1>
-      </NavbarBrand>
+      </Link>
 
       <Nav>
         <NavItem className="d-none d-sm-block m-2">

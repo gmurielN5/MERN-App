@@ -5,7 +5,6 @@ import { removeToken } from '../../util';
 import {
   Container,
   Navbar,
-  NavbarBrand,
   NavbarToggler,
   Collapse,
   Nav,
@@ -31,7 +30,6 @@ const AuthenticatedNav = () => {
 
   const toggle = () => setIsOpen(!isOpen);
 
-  //!todo call dispacth delete user
   const LoggoutHandler = (e) => {
     dispatch({
       type: 'USER_SUCCESS',
@@ -47,9 +45,9 @@ const AuthenticatedNav = () => {
     <Navbar expand="sm" color="light" className="navBar">
       <Container className="sidebar-wrapper">
         <Container className="p-0 d-flex justify-content-between">
-          <NavbarBrand className="m-0" to="/dashboard">
+          <Link className="m-0" to="/dashboard">
             <img alt="logo" src="/logo.svg" className="logo" />
-          </NavbarBrand>
+          </Link>
 
           <NavbarToggler onClick={toggle} className="me-2 border-0">
             <Avatar user={store.user} size="thumbnail" />

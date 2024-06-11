@@ -6,6 +6,7 @@ export const getProfile = async (userId, dispatch, didCancel) => {
     const response = await userAxios.get(
       `https://mern-app-c6q9.onrender.com/user/${userId}`
     );
+    console.log('get profile', response);
     if (!didCancel) {
       dispatch({
         type: 'USER_SUCCESS',
@@ -32,6 +33,7 @@ export const updateProfile = async (userId, newInput, dispatch) => {
       `https://mern-app-c6q9.onrender.com/user/${userId}`,
       newInput
     );
+    console.log('update profile', response);
 
     dispatch({
       type: 'USER_SUCCESS',
@@ -55,6 +57,8 @@ export const deleteUser = async (userId, dispatch) => {
     const response = await userAxios.delete(
       `https://mern-app-c6q9.onrender.com/user/${userId}`
     );
+    console.log('delete profile', response);
+
     dispatch({
       type: 'USER_SUCCESS',
       payload: {
@@ -83,6 +87,8 @@ export const follow = async (userId, followId, dispatch) => {
         followId: followId,
       }
     );
+    console.log('follow profile', response);
+
     dispatch({
       type: 'USER_FOLLOW',
       payload: {
@@ -106,11 +112,14 @@ export const unfollow = async (userId, unfollowId, dispatch) => {
   try {
     const response = await userAxios.put(
       `https://mern-app-c6q9.onrender.com/user/user/unfollow`,
+
       {
         userId: userId,
         unfollowId: unfollowId,
       }
     );
+    console.log('unfollow  profile', response);
+
     dispatch({
       type: 'USER_UNFOLLOW',
       payload: {

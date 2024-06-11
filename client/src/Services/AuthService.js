@@ -25,7 +25,6 @@ export const Register = (user) => {
   return userAxios
     .post('https://mern-app-c6q9.onrender.com/signup', user)
     .then((response) => {
-      console.log('post signup response', response);
       return response.data;
     })
     .catch((error) => {
@@ -46,7 +45,6 @@ export const Login = async (user, dispatch) => {
         user: response.data.user,
       },
     });
-
     return response;
   } catch (error) {
     dispatch({

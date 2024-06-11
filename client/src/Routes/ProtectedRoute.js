@@ -1,14 +1,15 @@
-import React from "react"
-import { Navigate, useLocation, Outlet } from "react-router-dom"
+import React from 'react';
+import { Navigate, useLocation, Outlet } from 'react-router-dom';
 
 const ProtectedRoute = ({ children, isAuthenticated }) => {
-  let location = useLocation()
-
+  let location = useLocation();
   if (!isAuthenticated) {
-    return <Navigate to="/" state={{ from: location }} replace />
+    return (
+      <Navigate to="/login" state={{ from: location }} replace />
+    );
   }
 
-  return children ? children : <Outlet />
-}
+  return children ? children : <Outlet />;
+};
 
-export default ProtectedRoute
+export default ProtectedRoute;

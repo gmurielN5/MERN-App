@@ -32,13 +32,12 @@ mongoose
 mongoose.Promise = global.Promise;
 
 // CORS Configuration
-
 const corsOptions = {
   origin: 'https://mern-app-front-end.onrender.com',
   optionsSuccessStatus: 200,
 };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 // app.use((req, res, next) => {
 //   res.header('Access-Control-Allow-Origin', '*');
