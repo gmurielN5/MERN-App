@@ -67,7 +67,7 @@ const Profile = () => {
 
       <Container className="p-4">
         <Row>
-          {filteredArticles.length > 0 ? (
+          {filteredArticles?.length > 0 ? (
             <Col className="pt-5 px-0">
               {filteredArticles.map((article, i) => (
                 <Col key={i} className="mb-5">
