@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react"
-import { useNavigate, useLocation, Link } from "react-router-dom"
+import React, { useState, useContext } from 'react';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import {
   Container,
   Row,
@@ -9,40 +9,40 @@ import {
   FormGroup,
   Input,
   Label,
-} from "reactstrap"
-import { AuthContext } from "../Context/AuthContext"
-import { Login } from "../Services/AuthService"
-import { setToken } from "../util"
+} from 'reactstrap';
+import { AuthContext } from '../Context/AuthContext';
+import { Login } from '../Services/AuthService';
+import { setToken } from '../util';
 
 const LoginForm = () => {
-  const [user, setUser] = useState({ email: "", password: "" })
-  const { setIsAuthenticated, dispatch } = useContext(AuthContext)
+  const [user, setUser] = useState({ email: '', password: '' });
+  const { setIsAuthenticated, dispatch } = useContext(AuthContext);
 
-  let navigate = useNavigate()
-  let location = useLocation()
+  let navigate = useNavigate();
+  let location = useLocation();
 
-  let from = location.state?.from?.pathname || "/dashboard"
+  let from = location.state?.from?.pathname || '/dashboard';
 
   const onChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value })
-  }
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
 
   const onSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const login = async () => {
       await Login(user, dispatch).then((response) => {
-        const { isAuthenticated, user, token } = response.data
+        const { isAuthenticated, user, token } = response.data;
         if (isAuthenticated) {
-          setToken("token", token)
-          setUser(user)
-          setIsAuthenticated(isAuthenticated)
-          navigate(from, { replace: true })
+          setToken('token', token);
+          setUser(user);
+          setIsAuthenticated(isAuthenticated);
+          navigate(from, { replace: true });
         }
-      })
-    }
-    login()
-  }
+      });
+    };
+    login();
+  };
 
   return (
     <Container className="sc pt-5">
@@ -81,7 +81,7 @@ const LoginForm = () => {
         </Form>
         <Row className="pt-4">
           <p className="text-center font-weight-bold">
-            No account ?{" "}
+            No account ?{' '}
             <Link to="/signup">
               <span className="fw-bold">Create One</span>
             </Link>
@@ -89,7 +89,7 @@ const LoginForm = () => {
         </Row>
       </Container>
     </Container>
-  )
-}
+  );
+};
 
-export default LoginForm
+export default LoginForm;

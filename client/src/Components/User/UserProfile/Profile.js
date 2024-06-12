@@ -31,13 +31,12 @@ export const Profile = ({ author, setAuthor }) => {
     let callApi = isFollowing ? unfollow : follow;
     if (!isAuthenticated) {
       navigate('/login', { replace: true });
+    } else {
+      callApi(user._id, author._id, dispatch).then((response) => {
+        const { user } = response.data;
+        setAuthor(user);
+      });
     }
-
-    callApi(user._id, author._id, dispatch).then((response) => {
-      const { user } = response.data;
-      console.log('set author user', user);
-      // setAuthor(user)
-    });
   };
 
   return (

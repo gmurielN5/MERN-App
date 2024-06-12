@@ -6,8 +6,6 @@ import {
   ModalBody,
   ModalFooter,
   Container,
-  // Row,
-  // Col,
 } from 'reactstrap';
 import { ListTopics } from '../ListTopics/ListTopics';
 import { Tags } from 'react-bootstrap-icons';

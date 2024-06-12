@@ -1,18 +1,21 @@
-import React, { useContext } from "react"
-import { Container, Nav, NavItem, Button } from "reactstrap"
-import { listNewsFeed, listFollowing } from "../../../Services/ContentService"
-import { AuthContext } from "../../../Context/AuthContext"
+import React, { useContext } from 'react';
+import { Container, Nav, NavItem, Button } from 'reactstrap';
+import {
+  listNewsFeed,
+  listFollowing,
+} from '../../../Services/ContentService';
+import { AuthContext } from '../../../Context/AuthContext';
 
 export const FilterButton = () => {
-  const { store, dispatch } = useContext(AuthContext)
-  const { user } = store
+  const { store, dispatch } = useContext(AuthContext);
+  const { user } = store;
 
   const newsfeeds = () => {
-    listNewsFeed(dispatch)
-  }
+    listNewsFeed(dispatch);
+  };
   const following = () => {
-    listFollowing(user._id, dispatch)
-  }
+    listFollowing(user._id, dispatch);
+  };
 
   return (
     <Container>
@@ -29,5 +32,5 @@ export const FilterButton = () => {
         </NavItem>
       </Nav>
     </Container>
-  )
-}
+  );
+};

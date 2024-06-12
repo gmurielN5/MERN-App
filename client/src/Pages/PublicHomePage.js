@@ -1,29 +1,29 @@
-import React, { useContext, useEffect } from "react"
-import { Link } from "react-router-dom"
-import { Container, Col, Row, Button } from "reactstrap"
-import { AuthContext } from "../Context/AuthContext"
-import { listNewsFeed } from "../Services/ContentService"
+import React, { useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Container, Col, Row, Button } from 'reactstrap';
+import { AuthContext } from '../Context/AuthContext';
+import { listNewsFeed } from '../Services/ContentService';
 
-import { HeroAnimation } from "../Components/Animation/HeroAnimation"
-import { SuggestedPosts } from "../Components/Article/SuggestedPosts/SuggestedPost"
-import { ListTopics } from "../Components/Topics/ListTopics/ListTopics"
-import { SuggestedUsers } from "../Components/User/SuggestedUser/SuggestedUsers"
+import { HeroAnimation } from '../Components/Animation/HeroAnimation';
+import { SuggestedPosts } from '../Components/Article/SuggestedPosts/SuggestedPost';
+import { ListTopics } from '../Components/Topics/ListTopics/ListTopics';
+import { SuggestedUsers } from '../Components/User/SuggestedUser/SuggestedUsers';
 
-import { GraphUpArrow } from "react-bootstrap-icons"
+import { GraphUpArrow } from 'react-bootstrap-icons';
 
 const PublicHomePage = () => {
-  const { store, dispatch } = useContext(AuthContext)
+  const { store, dispatch } = useContext(AuthContext);
 
   useEffect(() => {
-    let didCancel = false
+    let didCancel = false;
     const fetchArticles = () => {
-      listNewsFeed(dispatch, didCancel)
-    }
-    fetchArticles()
+      listNewsFeed(dispatch, didCancel);
+    };
+    fetchArticles();
     return () => {
-      didCancel = true
-    }
-  }, [dispatch])
+      didCancel = true;
+    };
+  }, [dispatch]);
 
   return (
     <Container fluid className="p-0">
@@ -31,7 +31,7 @@ const PublicHomePage = () => {
         <Row>
           <Col className="hero px-5">
             <Row className="py-5">
-              <h5 style={{ color: "white", letterSpacing: "0.5rem" }}>
+              <h5 style={{ color: 'white', letterSpacing: '0.5rem' }}>
                 Start a blog for free
               </h5>
             </Row>
@@ -50,7 +50,10 @@ const PublicHomePage = () => {
               </Link>
             </Row>
           </Col>
-          <Col md={4} className="heroAnimation border-left border-dark">
+          <Col
+            md={4}
+            className="heroAnimation border-left border-dark"
+          >
             <HeroAnimation />
           </Col>
         </Row>
@@ -64,7 +67,11 @@ const PublicHomePage = () => {
           </Col>
 
           <Row lg="3" sm="2" xs="1" className="mt-4">
-            <SuggestedPosts articles={store.articles} thumbnail index />
+            <SuggestedPosts
+              articles={store.articles}
+              thumbnail
+              index
+            />
           </Row>
         </Container>
       </Container>
@@ -72,7 +79,10 @@ const PublicHomePage = () => {
         <Container className="px-md-5">
           <Row className="mt-4">
             <Col md={8} className="pe-md-4">
-              <SuggestedPosts articles={store.articles} thumbnail={false} />
+              <SuggestedPosts
+                articles={store.articles}
+                thumbnail={false}
+              />
             </Col>
 
             <Col md={4}>
@@ -89,7 +99,7 @@ const PublicHomePage = () => {
         </Container>
       </Container>
     </Container>
-  )
-}
+  );
+};
 
-export default PublicHomePage
+export default PublicHomePage;

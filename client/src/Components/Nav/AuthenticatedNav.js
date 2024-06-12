@@ -94,13 +94,13 @@ const AuthenticatedNav = () => {
               <DropdownToggle className="toggle p-0">
                 <Avatar user={store.user} size="thumbnail" />
               </DropdownToggle>
-              <DropdownMenu className="border-0 mb-2">
+              <DropdownMenu className="border-0 py-2">
                 <DropdownItem className="py-4">
                   <Link to={`/dashboard/settings`}>Settings</Link>
                 </DropdownItem>
                 <DropdownItem
                   onClick={LoggoutHandler}
-                  className=" pb-4"
+                  className="py-4"
                 >
                   Sign out
                 </DropdownItem>

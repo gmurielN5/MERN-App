@@ -9,6 +9,8 @@ import AuthenticatedNav from '../Components/Nav/AuthenticatedNav';
 import Loading from '../Components/Loading/Loading';
 import Message from '../Components/Message/Message';
 
+import Root from '../Pages/Root';
+
 import PublicHomePage from '../Pages/PublicHomePage';
 import Signup from '../Pages/SignUp';
 import Login from '../Pages/Login';
@@ -25,7 +27,6 @@ import ProtectedRoute from './ProtectedRoute';
 
 function AppRoutes() {
   const { store, isAuthenticated } = useContext(AuthContext);
-
   return (
     <Container fluid>
       <Row
@@ -53,8 +54,8 @@ function AppRoutes() {
           <Message message={store.message} error={store.isError} />
           <Loading loading={store.Loading} />
           <Routes>
-            <Route index element={<PublicHomePage />} />
-            <Route path="home" element={<PublicHomePage />} />
+            <Route path="/" element={<Root />} />
+            <Route path="/home" element={<PublicHomePage />} />
             <Route
               path="dashboard"
               element={

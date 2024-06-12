@@ -21,7 +21,6 @@ userAxios.interceptors.request.use(
 );
 
 export const Register = (user) => {
-  console.log('post signup user', user);
   return userAxios
     .post('https://mern-app-c6q9.onrender.com/signup', user)
     .then((response) => {

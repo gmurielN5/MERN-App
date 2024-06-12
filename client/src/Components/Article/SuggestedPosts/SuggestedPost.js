@@ -7,7 +7,7 @@ export const SuggestedPosts = ({ articles, thumbnail, index }) => {
       {!articles?.length ? null : (
         <>
           {articles.map((article, i) => (
-            <Link to={`/${article._id}`}>
+            <Link to={`/${article._id}`} key={article._id}>
               {index && (
                 <span className="opacityIndex">{`0${i + 1}`}</span>
               )}

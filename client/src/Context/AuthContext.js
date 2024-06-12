@@ -1,18 +1,10 @@
-import React, {
-  createContext,
-  useState,
-  useEffect,
-  useReducer,
-} from 'react';
-import { useNavigate } from 'react-router-dom';
-import { IsAuthenticated } from '../Services/AuthService';
+import React, { createContext, useState, useReducer } from 'react';
+
 import { dataFetchReducer } from '../Reducers/reducer';
 
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const navigate = useNavigate();
-
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const initialState = {
@@ -29,22 +21,6 @@ export const AuthContextProvider = ({ children }) => {
     dataFetchReducer,
     initialState
   );
-
-  useEffect(() => {
-    let didCancel = false;
-    const getStatus = async () => {
-      await IsAuthenticated(dispatch, didCancel).then((response) => {
-        if (response) {
-          setIsAuthenticated(response.data.isAuthenticated);
-          navigate('/dashboard');
-        }
-      });
-    };
-    getStatus();
-    return () => {
-      didCancel = true;
-    };
-  }, [navigate]);
 
   return (
     <AuthContext.Provider
