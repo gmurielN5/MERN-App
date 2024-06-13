@@ -11,6 +11,7 @@ const Loading = ({ loading }) => {
       { opacity: 0.5, color: "#30A631" },
       { opacity: 0.8, color: "#3AF23C" },
     ],
+    loop:true,
   })
 
   if (!loading) {
