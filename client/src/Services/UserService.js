@@ -1,11 +1,11 @@
 import { userAxios } from './AuthService';
 
+const apiURL = process.env.REACT_APP_API_URL;
+
 export const getProfile = async (userId, dispatch, didCancel) => {
   dispatch({ type: 'LOADING' });
   try {
-    const response = await userAxios.get(
-      `https://mern-app-c6q9.onrender.com/user/${userId}`
-    );
+    const response = await userAxios.get(`${apiURL}/user/${userId}`);
     if (!didCancel) {
       dispatch({
         type: 'USER_SUCCESS',
@@ -29,7 +29,7 @@ export const updateProfile = async (userId, newInput, dispatch) => {
   });
   try {
     const response = await userAxios.put(
-      `https://mern-app-c6q9.onrender.com/user/${userId}`,
+      `${apiURL}/user/${userId}`,
       newInput
     );
     dispatch({
@@ -52,7 +52,7 @@ export const deleteUser = async (userId, dispatch) => {
   });
   try {
     const response = await userAxios.delete(
-      `https://mern-app-c6q9.onrender.com/user/${userId}`
+      `${apiURL}/user/${userId}`
     );
     dispatch({
       type: 'USER_SUCCESS',
@@ -76,7 +76,7 @@ export const follow = async (userId, followId, dispatch) => {
   });
   try {
     const response = await userAxios.put(
-      `https://mern-app-c6q9.onrender.com/user/user/follow`,
+      `${apiURL}/user/user/follow`,
       {
         userId: userId,
         followId: followId,
@@ -104,7 +104,7 @@ export const unfollow = async (userId, unfollowId, dispatch) => {
   });
   try {
     const response = await userAxios.put(
-      `https://mern-app-c6q9.onrender.com/user/user/unfollow`,
+      `${apiURL}/user/user/unfollow`,
       {
         userId: userId,
         unfollowId: unfollowId,

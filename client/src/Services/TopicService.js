@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+const apiURL = process.env.REACT_APP_API_URL;
+
 export const getTopicList = () => {
   return axios
-    .get(`https://mern-app-c6q9.onrender.com/dashboard/topic`)
+    .get(`${apiURL}/dashboard/topic`)
     .then((response) => {
       return response.data;
     })
@@ -13,7 +15,7 @@ export const getTopicList = () => {
 
 export const getTopic = (id) => {
   return axios
-    .get(`https://mern-app-c6q9.onrender.com/dashboard/topic/${id}`)
+    .get(`${apiURL}/dashboard/topic/${id}`)
     .then((response) => {
       return response.data;
     })
@@ -24,10 +26,7 @@ export const getTopic = (id) => {
 
 export const postTopic = (newTopic) => {
   return axios
-    .post(
-      `https://mern-app-c6q9.onrender.com/dashboard/topic/create`,
-      { name: newTopic }
-    )
+    .post(`${apiURL}/dashboard/topic/create`, { name: newTopic })
     .then((response) => {
       return response.data;
     })

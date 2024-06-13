@@ -3,6 +3,8 @@ import { getToken } from '../util';
 
 export const userAxios = axios.create();
 
+const apiURL = process.env.REACT_APP_API_URL;
+
 // interceptor to attach token on request
 userAxios.interceptors.request.use(
   (request) => {
@@ -22,7 +24,7 @@ userAxios.interceptors.request.use(
 
 export const Register = (user) => {
   return userAxios
-    .post('https://mern-app-c6q9.onrender.com/signup', user)
+    .post(`${apiURL}/signup`, user)
     .then((response) => {
       return response.data;
     })
@@ -34,10 +36,7 @@ export const Register = (user) => {
 export const Login = async (user, dispatch) => {
   dispatch({ type: 'LOADING' });
   try {
-    const response = await userAxios.post(
-      'https://mern-app-c6q9.onrender.com/login',
-      user
-    );
+    const response = await userAxios.post(`${apiURL}/login`, user);
     dispatch({
       type: 'USER_SUCCESS',
       payload: {
@@ -56,9 +55,7 @@ export const Login = async (user, dispatch) => {
 export const IsAuthenticated = async (dispatch, didCancel) => {
   dispatch({ type: 'LOADING' });
   try {
-    const response = await userAxios.get(
-      'https://mern-app-c6q9.onrender.com/user/profile'
-    );
+    const response = await userAxios.get(`${apiURL}/user/profile`);
     if (!didCancel) {
       dispatch({
         type: 'USER_SUCCESS',

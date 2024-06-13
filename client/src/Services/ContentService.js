@@ -1,12 +1,12 @@
 import { userAxios } from './AuthService';
 
+const apiURL = process.env.REACT_APP_API_URL;
+
 // GET REQUEST : '/public' get all articles
 export const listNewsFeed = async (dispatch, didCancel) => {
   dispatch({ type: 'LOADING' });
   try {
-    const response = await userAxios.get(
-      'https://mern-app-c6q9.onrender.com/public'
-    );
+    const response = await userAxios.get(`${apiURL}/public`);
     if (!didCancel) {
       dispatch({
         type: 'GET_INITIAL_CONTENT_SUCCESS',
@@ -31,7 +31,7 @@ export const listFollowing = async (userId, dispatch, didCancel) => {
   dispatch({ type: 'LOADING' });
   try {
     const response = await userAxios.get(
-      `https://mern-app-c6q9.onrender.com/dashboard/following/${userId}`
+      `${apiURL}/dashboard/following/${userId}`
     );
 
     if (!didCancel) {
@@ -56,7 +56,7 @@ export const addPost = async (userId, newitem, dispatch) => {
   dispatch({ type: 'LOADING' });
   try {
     const response = await userAxios.post(
-      `https://mern-app-c6q9.onrender.com/dashboard/${userId}`,
+      `${apiURL}/dashboard/${userId}`,
       newitem
     );
     dispatch({
@@ -81,7 +81,7 @@ export const updatePost = async (articleId, newInput, dispatch) => {
   });
   try {
     const response = await userAxios.put(
-      `https://mern-app-c6q9.onrender.com/dashboard/${articleId}`,
+      `${apiURL}/dashboard/${articleId}`,
       newInput
     );
     dispatch({
@@ -107,7 +107,7 @@ export const deletePost = async (articleId, dispatch) => {
   });
   try {
     const response = await userAxios.delete(
-      `https://mern-app-c6q9.onrender.com/dashboard/${articleId}`
+      `${apiURL}/dashboard/${articleId}`
     );
     dispatch({
       type: 'DELETE_CONTENT_SUCCESS',
@@ -128,7 +128,7 @@ export const addLike = async (userId, articleId, dispatch) => {
   });
   try {
     const response = await userAxios.put(
-      `https://mern-app-c6q9.onrender.com/dashboard/article/like`,
+      `${apiURL}/dashboard/article/like`,
       {
         userId: userId,
         articleId: articleId,
@@ -158,7 +158,7 @@ export const unLike = async (userId, articleId, dispatch) => {
   });
   try {
     const response = await userAxios.put(
-      `https://mern-app-c6q9.onrender.com/dashboard/article/unlike`,
+      `${apiURL}/dashboard/article/unlike`,
       {
         userId: userId,
         articleId: articleId,

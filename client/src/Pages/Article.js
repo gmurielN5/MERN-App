@@ -12,6 +12,8 @@ import { SearchBar } from '../Components/Search/Search';
 import { Profile } from '../Components/User/UserProfile/Profile';
 import { SuggestedPosts } from '../Components/Article/SuggestedPosts/SuggestedPost';
 
+const apiURL = process.env.REACT_APP_API_URL;
+
 const Article = () => {
   const { store } = useContext(AuthContext);
   const { user } = store;
@@ -25,9 +27,7 @@ const Article = () => {
   useEffect(() => {
     const fetchData = async () => {
       await userAxios
-        .get(
-          `https://mern-app-c6q9.onrender.com/dashboard/${articleId}`
-        )
+        .get(`${apiURL}/dashboard/${articleId}`)
         .then((response) => {
           const { article, user } = response.data;
           setArticle(article);
